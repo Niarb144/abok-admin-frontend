@@ -28,6 +28,7 @@ const handleLogin = async (e: React.FormEvent) => {
 
 
     localStorage.setItem('admin_token', data.token)
+    
     router.push('/admin/dashboard')
     }
 
