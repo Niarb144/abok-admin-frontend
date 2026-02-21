@@ -17,7 +17,7 @@ export default function Dashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                     <div className="card text-gray-700">Manage Destinations</div>
                     <div className="card text-gray-700">
-                        <Link href="create-safaris">Manage Safaris</Link>
+                        <Link href="safaris">Manage Safaris</Link>
                     </div>
                     <div className="card text-gray-700">Manage Accommodations</div>
                     <div className="card text-gray-700">Manage Gallery</div>
