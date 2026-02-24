@@ -1,8 +1,13 @@
 "use client"
 
 import Link from "next/link"
+import AdminHeader from "@/app/components/AdminHeader"
+
 export default function SafarisPage() {
     return (
+        <main>
+            <AdminHeader />
+           
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Manage Safaris</h1>
             <Link href="/admin/create-safaris" className="btn mb-4">Create New Safari</Link>
@@ -35,5 +40,6 @@ export default function SafarisPage() {
                 </table>
             </div>
         </div>
+        </main>
     )
 }

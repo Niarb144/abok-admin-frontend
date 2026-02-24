@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaRegEye } from "react-icons/fa";
 import { LuEyeClosed } from "react-icons/lu";
+import Header from '@/app/components/Header'
 
 export default function AdminLogin() {
   const router = useRouter()
@@ -29,7 +30,10 @@ export default function AdminLogin() {
   }
 
   return (
+    <main>
+        <Header />
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      
       <form onSubmit={handleLogin} className="bg-white p-6 rounded-xl shadow w-80">
         
         <h1 className="text-xl text-gray-800 font-bold mb-4">
@@ -60,7 +64,7 @@ export default function AdminLogin() {
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
           >
-            {showPassword ? <FaRegEye className="text-gray-700" /> : <LuEyeClosed className="text-gray-700" />}
+            {showPassword ? <FaRegEye className="text-gray-700 cursor-pointer" /> : <LuEyeClosed className="text-gray-700 cursor-pointer" />}
           </button>
         </div>
 
@@ -70,5 +74,6 @@ export default function AdminLogin() {
 
       </form>
     </div>
+    </main>
   )
 }
