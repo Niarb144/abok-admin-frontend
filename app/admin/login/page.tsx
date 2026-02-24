@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { FaRegEye } from "react-icons/fa";
+import { LuEyeClosed } from "react-icons/lu";
 
 export default function AdminLogin() {
   const router = useRouter()
@@ -56,9 +58,9 @@ export default function AdminLogin() {
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-500 hover:text-gray-800"
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? <FaRegEye className="text-gray-700" /> : <LuEyeClosed className="text-gray-700" />}
           </button>
         </div>
 
