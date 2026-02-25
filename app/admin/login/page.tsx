@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaRegEye } from "react-icons/fa";
 import { LuEyeClosed } from "react-icons/lu";
-import Header from '@/app/components/Header'
 
 export default function AdminLogin() {
   const router = useRouter()
@@ -22,7 +21,6 @@ export default function AdminLogin() {
     })
 
     const data = await res.json()
-
     if (!res.ok) return setError(data.message)
 
     localStorage.setItem('admin_token', data.token)
@@ -30,50 +28,79 @@ export default function AdminLogin() {
   }
 
   return (
-    <main>
-        <Header />
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      
-      <form onSubmit={handleLogin} className="bg-white p-6 rounded-xl shadow w-80">
-        
-        <h1 className="text-xl text-gray-800 font-bold mb-4">
-          Admin Login
-        </h1>
+    <main
+      className="min-h-screen flex items-center justify-center bg-cover bg-center relative h-[100dvh]"
+      style={{
+        backgroundImage: "url('/serengeti4.webp.jpg')" // 👈 add your safari image inside public folder
+      }}
+    >
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/60 "></div>
 
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+      {/* Login Card */}
+      <div className="relative z-10 w-full max-w-md px-6">
+        <form
+          onSubmit={handleLogin}
+          className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-8 text-white"
+        >
+          <h1 className="text-3xl font-serif font-semibold text-center mb-2 tracking-wide">
+            Welcome Back
+          </h1>
+          <p className="text-sm text-gray-300 text-center mb-6">
+            Sign in to access your safari dashboard
+          </p>
 
-        {/* Email */}
-        <input
-          className="w-full border rounded-lg p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8B4513]"
-          placeholder="Email"
-          onChange={e => setEmail(e.target.value)}
-        />
+          {error && (
+            <p className="text-red-400 text-sm mb-4 text-center">{error}</p>
+          )}
 
-        {/* Password Field */}
-        <div className="relative mt-3">
-          <input
-            className="w-full border rounded-lg p-2 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8B4513]"
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            onChange={e => setPassword(e.target.value)}
-          />
+          {/* Email */}
+          <div className="mb-4">
+            <label className="text-sm text-gray-300">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              onChange={e => setEmail(e.target.value)}
+              className="w-full mt-1 px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-600"
+            />
+          </div>
 
-          {/* Toggle Button */}
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
-          >
-            {showPassword ? <FaRegEye className="text-gray-700 cursor-pointer" /> : <LuEyeClosed className="text-gray-700 cursor-pointer" />}
+          {/* Password */}
+          <div className="mb-4 relative">
+            <label className="text-sm text-gray-300">Password</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              onChange={e => setPassword(e.target.value)}
+              className="w-full mt-1 px-4 py-2 pr-10 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-600"
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-[38px] text-gray-200 hover:text-white cursor-pointer"
+            >
+              {showPassword ? <FaRegEye /> : <LuEyeClosed />}
+            </button>
+          </div>
+
+          {/* Remember / Forgot */}
+          <div className="flex justify-between text-sm text-gray-300 mb-6">
+            <label className="flex items-center gap-2">
+              <input type="checkbox" className="accent-amber-600" />
+              Remember me
+            </label>
+            <button type="button" className="hover:text-amber-500 transition">
+              Forgot password?
+            </button>
+          </div>
+
+          {/* Button */}
+          <button className="w-full bg-amber-700 hover:bg-amber-800 text-white py-2 rounded-lg transition duration-300 font-medium tracking-wide shadow-lg cursor-pointer">
+            Sign In
           </button>
-        </div>
-
-        <button className="mt-5 w-full bg-[#8B4513] hover:bg-[#6f3710] text-white py-2 rounded-lg transition duration-300">
-          Login
-        </button>
-
-      </form>
-    </div>
+        </form>
+      </div>
     </main>
   )
 }
