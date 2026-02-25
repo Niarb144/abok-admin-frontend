@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import AdminHeader from "@/app/components/AdminHeader";
 
 export default function CreateSafari() {
   const [formData, setFormData] = useState<any>({});
@@ -62,7 +61,6 @@ export default function CreateSafari() {
 
   return (
     <main>
-      <AdminHeader />
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Create Safari</h1>
 

@@ -24,18 +24,18 @@ export default function AdminLogin() {
     if (!res.ok) return setError(data.message)
 
     localStorage.setItem('admin_token', data.token)
-    router.push('/admin/dashboard')
+    router.push('/admin')
   }
 
   return (
     <main
       className="min-h-screen flex items-center justify-center bg-cover bg-center relative h-[100dvh]"
       style={{
-        backgroundImage: "url('/serengeti4.webp.jpg')" // 👈 add your safari image inside public folder
+        backgroundImage: "url('/serengeti4.webp.jpg')"
       }}
     >
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60 "></div>
+      <div className="absolute inset-0 bg-black/50 "></div>
 
       {/* Login Card */}
       <div className="relative z-10 w-full max-w-md px-6">
@@ -78,7 +78,7 @@ export default function AdminLogin() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-[38px] text-gray-200 hover:text-white cursor-pointer"
+              className="absolute right-3 top-[38px] text-amber-500 hover:text-white cursor-pointer"
             >
               {showPassword ? <FaRegEye /> : <LuEyeClosed />}
             </button>

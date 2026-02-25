@@ -30,9 +30,6 @@ export default function AdminNavbar() {
             <a href="/admin/dashboard" className="hover:text-[#8B4513] transition">
               Dashboard
             </a>
-            <a href="/admin/safaris" className="hover:text-[#8B4513] transition">
-              Safaris
-            </a>
             <a href="/admin/users" className="hover:text-[#8B4513] transition">
               Users
             </a>
@@ -58,9 +55,6 @@ export default function AdminNavbar() {
           <nav className="flex flex-col px-6 py-4 gap-4 text-gray-700 font-medium">
             <a href="/admin/dashboard" className="hover:text-[#8B4513] transition">
               Dashboard
-            </a>
-            <a href="/admin/safaris" className="hover:text-[#8B4513] transition">
-              Safaris
             </a>
             <a href="/admin/users" className="hover:text-[#8B4513] transition">
               Users
