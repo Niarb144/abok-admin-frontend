@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react"
 import AdminGuard from "@/app/components/AdminGuard"
 import AdminHeader from "@/app/components/AdminHeader"
 import Sidebar from "@/app/components/Sidebar"
+import Footer from "@/app/components/Footer"  
 
 export default function AdminLayout({
   children,
@@ -25,12 +26,13 @@ export default function AdminLayout({
 
           <AdminHeader />
 
-          <main className="p-8 flex-1 bg-[#1c1a16]">
+          <main className="p-8 flex-1 bg-[#1c1a16] pl-64">
             {children}
           </main>
 
         </div>
       </div>
+      <Footer />
     </AdminGuard>
   )
 }

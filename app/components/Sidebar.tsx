@@ -10,7 +10,7 @@ export default function Sidebar() {
     return (
         <main>
         {/* SIDEBAR */}
-        <aside className="w-64 bg-[#2a261f] border-r border-[#3a342b] hidden md:flex flex-col p-6">
+        <aside className="w-64 bg-[#2a261f] border-r border-[#3a342b] hidden md:flex flex-col p-6 h-[100dvh] fixed">
 
           <h2 className="text-2xl font-serif mb-8 text-amber-500">
             Abok Admin

@@ -14,7 +14,7 @@ export default function SafarisPage() {
   }, [])
 
   return (
-    <div>
+    <div className="pl-16">
       <h1 className="text-2xl font-serif text-amber-500 mb-6">
         All Safaris
       </h1>

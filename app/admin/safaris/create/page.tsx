@@ -60,7 +60,7 @@ export default function CreateSafari() {
 
 
   return (
-    <main>
+    <main className="min-h-screen bg-[#1c1a16] text-white p-6 pb-20">
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Create Safari</h1>
 

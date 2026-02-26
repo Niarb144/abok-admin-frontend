@@ -16,7 +16,7 @@ export default function DashboardHome() {
   }, [])
 
   return (
-    <div>
+    <div className="pl-14">
       <h1 className="text-3xl font-serif text-amber-500 mb-8">
         Dashboard Overview
       </h1>
