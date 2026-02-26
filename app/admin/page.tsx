@@ -8,7 +8,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     const fetchSafaris = async () => {
-      const res = await fetch("http://localhost:5000/api/safaris")
+      const res = await fetch("https://abok-adventures-backend.onrender.com/api/safaris")
       const data = await res.json()
       setSafariCount(data.length)
     }
