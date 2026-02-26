@@ -37,7 +37,7 @@ export default function CreateSafari() {
     });
   }
 
-  const res = await fetch("http://localhost:5000/api/safaris/create", {
+  const res = await fetch("https://abok-adventures-backend.onrender.com/api/safaris/create", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
