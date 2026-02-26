@@ -10,7 +10,7 @@ const router = useRouter()
 
 useEffect(() => {
 const token = getToken()
-if (!token) router.push('/admin/login')
+if (!token) router.push('/login')
 }, [])
 
 
