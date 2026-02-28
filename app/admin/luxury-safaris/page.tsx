@@ -38,7 +38,7 @@ export default function SafarisPage() {
     try {
       const token = localStorage.getItem("admin_token")
 
-      const res = await fetch(`https://abok-adventures-backend.onrender.com/api/safaris/${id}`, {
+      const res = await fetch(`https://abok-adventures-backend.onrender.com/api/luxury-safaris/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export default function SafarisPage() {
                   <td className="p-4">
                     <Link
                       key={safari._id}
-                      href={`safaris/view/${safari._id}`}
+                      href={`luxury-safaris/view/${safari._id}`}
                     >
                     {safari.safari_title}
                     </Link>
