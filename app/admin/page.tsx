@@ -8,7 +8,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     const fetchSafaris = async () => {
-      const res = await fetch("https://abok-adventures-backend.onrender.com/api/safaris")
+      const res = await fetch("http://localhost:5000/api/safaris")
       const data = await res.json()
       setSafariCount(data.length)
     }
@@ -43,6 +43,14 @@ export default function DashboardHome() {
         {/* ACCOMMODATIONS PLACEHOLDER */}
         <div className="bg-[#2a261f] border border-[#3a342b] p-6 rounded-2xl opacity-60">
           <h2 className="text-lg text-gray-300">Accommodations</h2>
+          <p className="text-4xl font-bold mt-4">--</p>
+        </div>
+
+        {/* Luxury Safaris */}
+        <div 
+        onClick={() => router.push("/admin/luxury-safaris")}
+        className="bg-[#2a261f] border border-[#3a342b] p-6 rounded-2xl opacity-60">
+          <h2 className="text-lg text-gray-300">Luxury Safaris</h2>
           <p className="text-4xl font-bold mt-4">--</p>
         </div>
 

@@ -6,6 +6,7 @@ import { ChevronDown } from "lucide-react";
 
 export default function Sidebar() {
   const [openSafaris, setOpenSafaris] = useState(false)
+  const [openLuxurySafaris, setOpenLuxurySafaris] = useState(false)
 
     return (
         <main>
@@ -44,6 +45,34 @@ export default function Sidebar() {
                     Create Safari
                   </Link>
                   <Link href="/admin/safaris/update" className="block hover:text-amber-400">
+                    Update Safari
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* LUXURY SAFARIS DROPDOWN */}
+            <div>
+              <button
+                onClick={() => setOpenLuxurySafaris(!openLuxurySafaris)}
+                className="flex items-center justify-between w-full px-4 py-2 rounded-lg hover:bg-amber-700/20 transition"
+              >
+                Manage Luxury Safaris
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${openLuxurySafaris ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {openLuxurySafaris && (
+                <div className="ml-4 mt-2 space-y-2 text-sm text-gray-300">
+                  <Link href="/admin/luxury-safaris" className="block hover:text-amber-400">
+                    View All Safaris
+                  </Link>
+                  <Link href="/admin/luxury-safaris/create" className="block hover:text-amber-400">
+                    Create Safari
+                  </Link>
+                  <Link href="/admin/luxury-safaris/update" className="block hover:text-amber-400">
                     Update Safari
                   </Link>
                 </div>

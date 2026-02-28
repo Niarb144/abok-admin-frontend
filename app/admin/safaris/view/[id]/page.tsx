@@ -8,8 +8,9 @@ async function getSafari(id: string) {
     { cache: "no-store" }
   );
 
-  if (!res.ok) return null;
-  return res.json();
+  const data = await res.json();
+  console.log("SAFARI DATA:", data); // 👈 check this
+  return data;
 }
 
 export default async function SafariDetails({
