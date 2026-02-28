@@ -17,7 +17,7 @@ export default function SafarisPage() {
   useEffect(() => {
     const fetchSafaris = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/luxury-safaris")
+        const res = await fetch("https://abok-adventures-backend.onrender.com/api/luxury-safaris")
         const data = await res.json()
         setSafaris(data)
       } catch (error) {
