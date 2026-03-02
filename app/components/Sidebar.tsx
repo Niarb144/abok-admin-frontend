@@ -55,7 +55,7 @@ export default function Sidebar() {
             <div>
               <button
                 onClick={() => setOpenLuxurySafaris(!openLuxurySafaris)}
-                className="flex items-center justify-between w-full px-4 py-2 rounded-lg hover:bg-amber-700/20 transition"
+                className="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-amber-700/20 transition"
               >
                 Manage Luxury Safaris
                 <ChevronDown
