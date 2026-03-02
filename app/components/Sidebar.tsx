@@ -7,6 +7,7 @@ import { ChevronDown } from "lucide-react";
 export default function Sidebar() {
   const [openSafaris, setOpenSafaris] = useState(false)
   const [openLuxurySafaris, setOpenLuxurySafaris] = useState(false)
+  const [openDestinations, setOpenDestinations] = useState(false)
 
     return (
         <main>
@@ -79,9 +80,29 @@ export default function Sidebar() {
               )}
             </div>
 
-            <Link href="/admin/destinations" className="block px-4 py-2 rounded-lg hover:bg-amber-700/20 transition">
-              Manage Destinations
-            </Link>
+            <div>
+              <button
+                onClick={() => setOpenDestinations(!openDestinations)}
+                className="flex items-center justify-between w-full px-4 py-2 rounded-lg hover:bg-amber-700/20 transition"
+              >
+                Manage Destinations
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${openDestinations ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {openDestinations && (
+                <div className="ml-4 mt-2 space-y-2 text-sm text-gray-300">
+                  <Link href="/admin/destinations" className="block hover:text-amber-400">
+                    View All Destinations
+                  </Link>
+                  <Link href="/admin/destinations/create" className="block hover:text-amber-400">
+                    Create Destination
+                  </Link>
+                </div>
+              )}
+            </div>
 
             <Link href="/admin/accommodations" className="block px-4 py-2 rounded-lg hover:bg-amber-700/20 transition">
               Manage Accommodations
