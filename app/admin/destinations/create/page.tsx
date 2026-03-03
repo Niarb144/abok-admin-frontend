@@ -81,12 +81,12 @@ export default function CreateDestination() {
           className="w-full border p-2" />
 
         <textarea name="destination_facts"
-          placeholder="Facts (comma separated)"
+          placeholder="Facts (# separated)"
           onChange={handleChange}
           className="w-full border p-2" />
 
         <textarea name="destination_activities"
-          placeholder="Destination Activities (comma separated)"
+          placeholder="Destination Activities (# separated)"
           onChange={handleChange}
           className="w-full border p-2" />
 

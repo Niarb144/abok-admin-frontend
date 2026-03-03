@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 export default function DashboardHome() {
   const [safariCount, setSafariCount] = useState(0)
   const [luxurySafariCount, setLuxurySafariCount] = useState(0)
+  const [destinationCount, setDestinationCount] = useState(0)
   const router = useRouter()
 
   useEffect(() => {
@@ -23,6 +24,15 @@ export default function DashboardHome() {
       setLuxurySafariCount(data.length)
     }
     fetchLuxurySafaris()
+  }, [])
+
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      const res = await fetch("https://abok-adventures-backend.onrender.com/api/destinations")
+      const data = await res.json()
+      setDestinationCount(data.length)
+    }
+    fetchDestinations()
   }, [])
 
   return (
@@ -45,9 +55,14 @@ export default function DashboardHome() {
         </div>
 
         {/* DESTINATIONS PLACEHOLDER */}
-        <div className="bg-[#2a261f] border border-[#3a342b] p-6 rounded-2xl opacity-60">
+        <div
+          onClick={() => router.push("/admin/destinations")}
+          className="cursor-pointer bg-[#2a261f] border border-[#3a342b] p-6 rounded-2xl hover:border-amber-600 transition shadow-lg"
+        >
           <h2 className="text-lg text-gray-300">Destinations</h2>
-          <p className="text-4xl font-bold mt-4">--</p>
+          <p className="text-4xl font-bold text-amber-500 mt-4">
+            {destinationCount}
+          </p>
         </div>
 
         {/* ACCOMMODATIONS PLACEHOLDER */}
