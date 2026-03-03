@@ -37,7 +37,7 @@ export default function CreateDestination() {
     });
   }
 
-  const res = await fetch("http://localhost:5000/api/destinations/", {
+  const res = await fetch("https://abok-adventures-backend.onrender.com/api/destinations/", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
