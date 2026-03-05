@@ -7,18 +7,18 @@ export default function DestinationDetailsClient({ destination }: any) {
       {/* HEADER */}
       <div className="flex items-start gap-6 bg-white p-6 rounded-xl shadow-sm border">
         <img
-          src={destination.destination_images?.[0]}
-          alt={destination.destination_title}
+          src={destination.destination.destination_images[0]}
+          alt={destination.destination.destination_title}
           className="w-64 h-40 object-cover rounded-lg border"
         />
 
         <div>
           <h1 className="text-2xl font-bold text-gray-800 mb-2">
-            {destination.destination_title}
+            {destination.destination.destination_title}
           </h1>
 
           <p className="text-gray-600 max-w-2xl">
-            {destination.destination_description}
+            {destination.destination.destination_description}
           </p>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default function DestinationDetailsClient({ destination }: any) {
         </h2>
 
         <ul className="list-disc list-inside space-y-2 text-gray-700">
-          {destination.destination_facts?.map((item: string, index: number) => (
+          {destination.destination.destination_facts?.map((item: string, index: number) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -57,7 +57,7 @@ export default function DestinationDetailsClient({ destination }: any) {
         </h2>
 
         <ul className="list-disc list-inside space-y-2 text-gray-700">
-          {destination.destination_activities?.map((item: string, index: number) => (
+          {destination.destination.destination_activities?.map((item: string, index: number) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
