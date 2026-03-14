@@ -75,6 +75,11 @@ export default function CreateDestination() {
           onChange={handleChange}
           className="w-full border p-2" />
 
+        <input name="destination_location"
+          placeholder="Destination Location"
+          onChange={handleChange}
+          className="w-full border p-2" />
+
         <textarea name="destination_description"
           placeholder="Overview"
           onChange={handleChange}
