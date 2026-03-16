@@ -8,6 +8,7 @@ export default function Sidebar() {
   const [openSafaris, setOpenSafaris] = useState(false)
   const [openLuxurySafaris, setOpenLuxurySafaris] = useState(false)
   const [openDestinations, setOpenDestinations] = useState(false)
+  const [openGallery, setOpenGallery] = useState(false)
 
     return (
         <main>
@@ -104,6 +105,31 @@ export default function Sidebar() {
               )}
             </div>
 
+            {/* GALLERY DROPDOWN */}
+            <div>
+              <button
+                onClick={() => setOpenGallery(!openGallery)}
+                className="flex items-center justify-between w-full px-4 py-2 rounded-lg hover:bg-amber-700/20 transition"
+              >
+                Manage Gallery
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${openGallery ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {openGallery && (
+                <div className="ml-4 mt-2 space-y-2 text-sm text-gray-300">
+                  <Link href="/admin/gallery" className="block hover:text-amber-400">
+                    View Gallery
+                  </Link>
+                  <Link href="/admin/gallery/create" className="block hover:text-amber-400">
+                    Add Gallery Item
+                  </Link>
+                </div>
+              )}
+            </div>
+            
             <Link href="/admin/accommodations" className="block px-4 py-2 rounded-lg hover:bg-amber-700/20 transition">
               Manage Accommodations
             </Link>
