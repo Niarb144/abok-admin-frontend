@@ -6,6 +6,7 @@ export default function DashboardHome() {
   const [safariCount, setSafariCount] = useState(0)
   const [luxurySafariCount, setLuxurySafariCount] = useState(0)
   const [destinationCount, setDestinationCount] = useState(0)
+  const [galleryCount, setGalleryCount] = useState(0)
   const router = useRouter()
 
   useEffect(() => {
@@ -33,6 +34,15 @@ export default function DashboardHome() {
       setDestinationCount(data.length)
     }
     fetchDestinations()
+  }, [])
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      const res = await fetch("https://abok-adventures-backend.onrender.com/api/gallery")
+      const data = await res.json()
+      setGalleryCount(data.length)
+    }
+    fetchGallery()
   }, [])
 
   return (
@@ -78,6 +88,16 @@ export default function DashboardHome() {
           <h2 className="text-lg text-gray-300">Luxury Safaris</h2>
           <p className="text-4xl font-bold text-amber-500 mt-4">
             {luxurySafariCount}
+          </p>
+        </div>
+
+        {/* Gallery */}
+        <div 
+        onClick={() => router.push("/admin/gallery")}
+        className="cursor-pointer bg-[#2a261f] border border-[#3a342b] p-6 rounded-2xl hover:border-amber-600 transition">
+          <h2 className="text-lg text-gray-300">Gallery</h2>
+          <p className="text-4xl font-bold text-amber-500 mt-4">
+            {galleryCount}
           </p>
         </div>
 
