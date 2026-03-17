@@ -6,6 +6,7 @@ export default function CreateDestination() {
   const [formData, setFormData] = useState<any>({});
   const [images, setImages] = useState<FileList | null>(null);
   const [videos, setVideos] = useState<FileList | null>(null);
+  const [loading, setLoading] = useState(false); 
 
   const handleChange = (e: any) => {
     setFormData({
@@ -37,25 +38,32 @@ export default function CreateDestination() {
     });
   }
 
-  const res = await fetch("https://abok-adventures-backend.onrender.com/api/destinations/", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: data,
-  });
+  try{
+    setLoading(true); // ✅ START LOADING
 
-//   const result = await res.json();
-//   alert(result.message);
-// };
+    const res = await fetch("https://abok-adventures-backend.onrender.com/api/destinations/", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: data,
+    });
+
     const text = await res.text();
 
-    try {
-      const result = JSON.parse(text);
-      alert(result.message || "Success");
-    } catch (error) {
-      console.error("Server returned non-JSON:", text);
+      try {
+        const result = JSON.parse(text);
+        alert(result.message || "Success");
+      } catch (error) {
+        console.error("Server returned non-JSON:", text);
+      }
+   } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false); // ✅ STOP LOADING
     }
+
   };
 
 
@@ -107,10 +115,23 @@ export default function CreateDestination() {
             onChange={(e) => setVideos(e.target.files)} />
         </div>
 
-        <button type="submit"
-          className="bg-green-600 text-white px-6 py-2 rounded">
-          Add Destination
-        </button>
+        {/* BUTTON WITH LOADER */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-green-600 text-white px-6 py-2 rounded flex items-center justify-center gap-2 disabled:opacity-50"
+          >
+
+            {loading ? (
+              <>
+                <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                Uploading...
+              </>
+            ) : (
+              "Create Destination"
+            )}
+
+          </button>
       </form>
     </div>
     </main>

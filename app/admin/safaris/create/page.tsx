@@ -6,6 +6,7 @@ export default function CreateSafari() {
   const [formData, setFormData] = useState<any>({});
   const [images, setImages] = useState<FileList | null>(null);
   const [videos, setVideos] = useState<FileList | null>(null);
+  const [loading, setLoading] = useState(false); 
 
   const handleChange = (e: any) => {
     setFormData({
@@ -15,124 +16,147 @@ export default function CreateSafari() {
   };
 
   const handleSubmit = async (e: any) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem("admin_token");
 
-  const data = new FormData();
+    const data = new FormData();
 
-  Object.keys(formData).forEach(key => {
-    data.append(key, formData[key]);
-  });
-
-  if (images) {
-    Array.from(images).forEach(file => {
-      data.append("safari_images", file);
+    Object.keys(formData).forEach((key) => {
+      data.append(key, formData[key]);
     });
-  }
 
-  if (videos) {
-    Array.from(videos).forEach(file => {
-      data.append("safari_video", file);
-    });
-  }
+    if (images) {
+      Array.from(images).forEach((file) => {
+        data.append("safari_images", file);
+      });
+    }
 
-  const res = await fetch("https://abok-adventures-backend.onrender.com/api/safaris/create", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: data,
-  });
-
-//   const result = await res.json();
-//   alert(result.message);
-// };
-    const text = await res.text();
+    if (videos) {
+      Array.from(videos).forEach((file) => {
+        data.append("safari_video", file);
+      });
+    }
 
     try {
-      const result = JSON.parse(text);
-      alert(result.message || "Success");
+      setLoading(true); // ✅ START LOADING
+
+      const res = await fetch(
+        "https://abok-adventures-backend.onrender.com/api/safaris/create",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: data,
+        }
+      );
+
+      const text = await res.text();
+
+      try {
+        const result = JSON.parse(text);
+        alert(result.message || "Success");
+      } catch (error) {
+        console.error("Server returned non-JSON:", text);
+      }
+
     } catch (error) {
-      console.error("Server returned non-JSON:", text);
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false); // ✅ STOP LOADING
     }
   };
 
-
   return (
     <main className="min-h-screen bg-[#1c1a16] text-white p-6 pb-20">
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Create Safari</h1>
+      <div className="max-w-4xl mx-auto p-6">
+        <h1 className="text-3xl font-bold mb-6">Create Safari</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-        <input name="safari_title" placeholder="Safari Title"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <input name="safari_title" placeholder="Safari Title"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <input name="safari_travel_locations"
-          placeholder="Travel Locations (comma separated)"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <input name="safari_travel_locations"
+            placeholder="Travel Locations (comma separated)"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <input name="safari_country"
-          placeholder="Countries (comma separated)"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <input name="safari_country"
+            placeholder="Countries (comma separated)"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <textarea name="safari_overview"
-          placeholder="Overview"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <textarea name="safari_overview"
+            placeholder="Overview"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <textarea name="safari_itinerary"
-          placeholder="Itinerary (comma separated)"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <textarea name="safari_itinerary"
+            placeholder="Itinerary (comma separated)"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <textarea name="safari_inclusions"
-          placeholder="Inclusions (comma separated)"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <textarea name="safari_inclusions"
+            placeholder="Inclusions (comma separated)"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <textarea name="safari_exclusions"
-          placeholder="Exclusions (comma separated)"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <textarea name="safari_exclusions"
+            placeholder="Exclusions (comma separated)"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <input name="safari_pricing"
-          placeholder="Pricing"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <input name="safari_pricing"
+            placeholder="Pricing"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <textarea name="safari_highlights"
-          placeholder="Highlights (comma separated)"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <textarea name="safari_highlights"
+            placeholder="Highlights (comma separated)"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <textarea name="safari_optional_activities"
-          placeholder="Optional Activities (comma separated)"
-          onChange={handleChange}
-          className="w-full border p-2" />
+          <textarea name="safari_optional_activities"
+            placeholder="Optional Activities (comma separated)"
+            onChange={handleChange}
+            className="w-full border p-2" />
 
-        <div>
-          <label className="block mb-2">Upload Images</label>
-          <input type="file" multiple
-            onChange={(e) => setImages(e.target.files)} />
-        </div>
+          <div>
+            <label className="block mb-2">Upload Images</label>
+            <input type="file" multiple
+              onChange={(e) => setImages(e.target.files)} />
+          </div>
 
-        <div>
-          <label className="block mb-2">Upload Videos</label>
-          <input type="file" multiple
-            onChange={(e) => setVideos(e.target.files)} />
-        </div>
+          <div>
+            <label className="block mb-2">Upload Videos</label>
+            <input type="file" multiple
+              onChange={(e) => setVideos(e.target.files)} />
+          </div>
 
-        <button type="submit"
-          className="bg-green-600 text-white px-6 py-2 rounded">
-          Create Safari
-        </button>
-      </form>
-    </div>
+          {/* BUTTON WITH LOADER */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-green-600 text-white px-6 py-2 rounded flex items-center justify-center gap-2 disabled:opacity-50"
+          >
+
+            {loading ? (
+              <>
+                <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                Uploading...
+              </>
+            ) : (
+              "Create Safari"
+            )}
+
+          </button>
+
+        </form>
+      </div>
     </main>
   );
 }
