@@ -50,7 +50,7 @@ export default function UploadGallery() {
     try{
 
         await fetch(
-        "http://localhost:5000/api/gallery/upload",
+        "https://abok-adventures-backend.onrender.com/api/gallery/upload",
         {
         method:"POST",
         body:formData
