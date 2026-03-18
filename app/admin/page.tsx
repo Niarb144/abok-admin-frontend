@@ -7,6 +7,7 @@ export default function DashboardHome() {
   const [luxurySafariCount, setLuxurySafariCount] = useState(0)
   const [destinationCount, setDestinationCount] = useState(0)
   const [galleryCount, setGalleryCount] = useState(0)
+  const [hotelCount, setHotelCount] = useState(0)
   const router = useRouter()
 
   useEffect(() => {
@@ -45,6 +46,20 @@ export default function DashboardHome() {
     fetchGallery()
   }, [])
 
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/hotels")
+        const data = await res.json()
+        setHotelCount(data.length)
+      } catch (error) {
+        console.error("Error fetching hotels:", error)
+      }
+    }
+
+    fetchHotels()
+  }, [])
+
   return (
     <div className="pl-14">
       <h1 className="text-3xl font-serif text-amber-500 mb-8">
@@ -76,9 +91,14 @@ export default function DashboardHome() {
         </div>
 
         {/* ACCOMMODATIONS PLACEHOLDER */}
-        <div className="bg-[#2a261f] border border-[#3a342b] p-6 rounded-2xl opacity-60">
+        <div 
+          onClick={() => router.push("/admin/hotels")}
+          className="cursor-pointer bg-[#2a261f] border border-[#3a342b] p-6 rounded-2xl hover:border-amber-600 transition shadow-lg"
+        >
           <h2 className="text-lg text-gray-300">Accommodations</h2>
-          <p className="text-4xl font-bold mt-4">--</p>
+          <p className="text-4xl font-bold text-amber-500 mt-4">
+            {hotelCount}
+          </p>
         </div>
 
         {/* Luxury Safaris */}

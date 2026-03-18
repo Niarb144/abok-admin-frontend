@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function CreateDestination() {
+export default function CreateHotel() {
   const [formData, setFormData] = useState<any>({});
   const [images, setImages] = useState<FileList | null>(null);
   const [videos, setVideos] = useState<FileList | null>(null);
@@ -29,13 +29,13 @@ export default function CreateDestination() {
 
     if (images) {
       Array.from(images).forEach(file => {
-        data.append("destination_images", file);
+        data.append("hotel_images", file);
       });
     }
 
     if (videos) {
       Array.from(videos).forEach(file => {
-        data.append("destination_video", file);
+        data.append("hotel_videos", file);
       });
     }
 
@@ -43,7 +43,7 @@ export default function CreateDestination() {
       setLoading(true); // ✅ START LOADING
 
       const res = await fetch(
-        "https://abok-adventures-backend.onrender.com/api/destinations/",
+        "http://localhost:5000/api/hotels",
         {
           method: "POST",
           headers: {
@@ -54,6 +54,7 @@ export default function CreateDestination() {
       );
 
       const text = await res.text();
+
 
       if (!res.ok) {
         console.error("Server error:", text);
@@ -83,7 +84,7 @@ export default function CreateDestination() {
   return (
     <main className="min-h-screen bg-[#1c1a16] text-white p-6 pb-20">
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Create Tour Destination</h1>
+      <h1 className="text-3xl font-bold mb-6">Create Hotel</h1>
 
       {loading && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -92,43 +93,43 @@ export default function CreateDestination() {
       )}
       <form onSubmit={handleSubmit} className="space-y-4">
 
-        <input name="destination_title" placeholder="Destination Title"
+        <input name="hotel_title" placeholder="Hotel Name"
           onChange={handleChange}
           className="w-full border p-2" />
 
-        <input name="destination_country"
-          placeholder="Destination Country"
+        <input name="hotel_country"
+          placeholder="Hotel Country"
           onChange={handleChange}
           className="w-full border p-2" />
 
-        <input name="destination_location"
-          placeholder="Destination Location"
+        <input name="hotel_location"
+          placeholder="Hotel Location"
           onChange={handleChange}
           className="w-full border p-2" />
 
-        <textarea name="destination_description"
+        <textarea name="hotel_description"
           placeholder="Overview"
           onChange={handleChange}
           className="w-full border p-2" />
 
-        <textarea name="destination_facts"
+        <textarea name="hotel_details"
           placeholder="Facts (# separated)"
           onChange={handleChange}
           className="w-full border p-2" />
 
-        <textarea name="destination_activities"
-          placeholder="Destination Activities (# separated)"
+        <textarea name="hotel_amenities"
+          placeholder="Amenities (# separated)"
           onChange={handleChange}
           className="w-full border p-2" />
 
         <div>
-          <label className="block mb-2">Upload Images</label>
+          <label className="block mb-2 cursor-pointer">Upload Images</label>
           <input type="file" multiple
             onChange={(e) => setImages(e.target.files)} />
         </div>
 
         <div>
-          <label className="block mb-2">Upload Videos</label>
+          <label className="block mb-2 cursor-pointer">Upload Videos</label>
           <input type="file" multiple
             onChange={(e) => setVideos(e.target.files)} />
         </div>
@@ -144,7 +145,7 @@ export default function CreateDestination() {
               Uploading...
             </>
           ) : (
-            "Add Destination"
+            "Add Hotel"
           )}
         </button>
       </form>

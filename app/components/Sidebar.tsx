@@ -9,6 +9,7 @@ export default function Sidebar() {
   const [openLuxurySafaris, setOpenLuxurySafaris] = useState(false)
   const [openDestinations, setOpenDestinations] = useState(false)
   const [openGallery, setOpenGallery] = useState(false)
+  const [openAccommodations, setOpenAccommodations] = useState(false)
 
     return (
         <main>
@@ -130,9 +131,30 @@ export default function Sidebar() {
               )}
             </div>
             
-            <Link href="/admin/accommodations" className="block px-4 py-2 rounded-lg hover:bg-amber-700/20 transition">
-              Manage Accommodations
-            </Link>
+            {/* ACCOMMODATIONS DROPDOWN */}
+            <div>
+              <button
+                onClick={() => setOpenAccommodations(!openAccommodations)}
+                className="flex items-center justify-between w-full px-4 py-2 rounded-lg hover:bg-amber-700/20 transition"
+              >
+                Manage Accommodations
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${openAccommodations ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {openAccommodations && (
+                <div className="ml-4 mt-2 space-y-2 text-sm text-gray-300">
+                  <Link href="/admin/hotels" className="block hover:text-amber-400">
+                    View Accommodations
+                  </Link>
+                  <Link href="/admin/hotels/create" className="block hover:text-amber-400">
+                    Add Accommodation
+                  </Link>
+                </div>
+              )}
+            </div>
 
           </nav>
         </aside>

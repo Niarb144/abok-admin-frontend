@@ -2,24 +2,24 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 
-interface Destination {
-  _id: string
+interface Hotel {
+  _id: string   
   title: string
   price: number
   duration: string
 }
 
-export default function DestinationsPage() {
-  const [destinations, setDestinations] = useState<Destination[]>([])
+export default function HotelsPage() {
+  const [hotels, setHotels] = useState<Hotel[]>([])
   const [loading, setLoading] = useState(true)
 
-  // Fetch destinations
+  // Fetch hotels
   useEffect(() => {
-    const fetchDestinations = async () => {
+    const fetchHotels = async () => {
       try {
-        const res = await fetch("https://abok-adventures-backend.onrender.com/api/destinations")
+        const res = await fetch("http://localhost:5000/api/hotels")
         const data = await res.json()
-        setDestinations(data)
+        setHotels(data)
       } catch (error) {
         console.error(error)
       } finally {
@@ -27,18 +27,18 @@ export default function DestinationsPage() {
       }
     }
 
-    fetchDestinations()
+    fetchHotels()
   }, [])
 
   // DELETE FUNCTION
   const handleDelete = async (id: string) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this destination?")
+    const confirmDelete = window.confirm("Are you sure you want to delete this hotel?")
     if (!confirmDelete) return
 
     try {
       const token = localStorage.getItem("admin_token")
 
-      const res = await fetch(`https://abok-adventures-backend.onrender.com/api/destinations/${id}`, {
+      const res = await fetch(`http://localhost:5000/api/hotels/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -47,14 +47,14 @@ export default function DestinationsPage() {
       })
 
       if (!res.ok) {
-        throw new Error("Failed to delete destination")
+        throw new Error("Failed to delete hotel")
       }
 
-      // Remove destination from UI instantly
-      setDestinations(prev => prev.filter(dest => dest._id !== id))
+      // Remove hotel from UI instantly
+      setHotels(prev => prev.filter(hotel => hotel._id !== id))
 
     } catch (error) {
-      alert("Error deleting destination")
+      alert("Error deleting hotel")
       console.error(error)
     }
   }
@@ -62,11 +62,11 @@ export default function DestinationsPage() {
   return (
     <div className="pl-16 mb-10">
       <h1 className="text-2xl font-serif text-amber-500 mb-6">
-        All Destinations
+        All Hotels
       </h1>
 
       {loading ? (
-        <p className="text-gray-400">Loading destinations...</p>
+        <p className="text-gray-400">Loading hotels...</p>
       ) : (
         <div className="overflow-x-auto bg-[#2a261f] rounded-xl border border-[#3a342b]">
           <table className="w-full text-left">
@@ -80,26 +80,26 @@ export default function DestinationsPage() {
             </thead>
 
             <tbody>
-              {destinations.map((destination: any) => (
+              {hotels.map((hotel: any) => (
                 
                 <tr
-                  key={destination._id}
+                  key={hotel._id}
                   className="border-t border-[#3a342b] hover:bg-[#332e26] transition"
                 >
                   <td className="p-4">
                     <Link
-                      key={destination._id}
-                      href={`destinations/view/${destination._id}`}
+                      key={hotel._id}
+                      href={`hotels/view/${hotel._id}`}
                     >
-                    {destination.destination_title}
+                    {hotel.hotel_title}
                     </Link>
                   </td>
-                  {/* <td className="p-4">${destination.destination_title}</td> */}
-                  <td className="p-4">{destination.destination_country}</td>
+                  {/* <td className="p-4">${hotel.hotel_title}</td> */}
+                  <td className="p-4">{hotel.hotel_country}</td>
 
                   <td className="p-4 text-right">
                     <button
-                      onClick={() => handleDelete(destination._id)}
+                      onClick={() => handleDelete(hotel._id)}
                       className="bg-red-600 hover:bg-red-700 px-4 py-1 rounded-lg text-sm transition"
                     >
                       Delete
