@@ -16,47 +16,63 @@ export default function CreateDestination() {
   };
 
   const handleSubmit = async (e: any) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem("admin_token");
+    const data = new FormData();
 
-  const data = new FormData();
-
-  Object.keys(formData).forEach(key => {
-    data.append(key, formData[key]);
-  });
-
-  if (images) {
-    Array.from(images).forEach(file => {
-      data.append("destination_images", file);
+    Object.keys(formData).forEach(key => {
+      if (formData[key]) {
+        data.append(key, formData[key]);
+      }
     });
-  }
 
-  if (videos) {
-    Array.from(videos).forEach(file => {
-      data.append("destination_video", file);
-    });
-  }
-  
+    if (images) {
+      Array.from(images).forEach(file => {
+        data.append("destination_images", file);
+      });
+    }
 
-  const res = await fetch("https://abok-adventures-backend.onrender.com/api/destinations/", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: data,
-  });
-
-//   const result = await res.json();
-//   alert(result.message);
-// };
-    const text = await res.text();
+    if (videos) {
+      Array.from(videos).forEach(file => {
+        data.append("destination_video", file);
+      });
+    }
 
     try {
-      const result = JSON.parse(text);
-      alert(result.message || "Success");
+      setLoading(true); // ✅ START LOADING
+
+      const res = await fetch(
+        "https://abok-adventures-backend.onrender.com/api/destinations/",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: data,
+        }
+      );
+
+      const text = await res.text();
+
+      if (!res.ok) {
+        console.error("Server error:", text);
+        alert("Upload failed");
+        return;
+      }
+
+      try {
+        const result = JSON.parse(text);
+        alert(result.message || "Success");
+      } catch {
+        console.log("Non-JSON response:", text);
+      }
+
     } catch (error) {
-      console.error("Server returned non-JSON:", text);
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false); // ✅ STOP LOADING
     }
   };
 
@@ -66,6 +82,11 @@ export default function CreateDestination() {
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Create Tour Destination</h1>
 
+      {loading && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4">
 
         <input name="destination_title" placeholder="Destination Title"
@@ -109,9 +130,19 @@ export default function CreateDestination() {
             onChange={(e) => setVideos(e.target.files)} />
         </div>
 
-        <button type="submit"
-          className="bg-green-600 text-white px-6 py-2 rounded">
-          Add Destination
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-green-600 text-white px-6 py-2 rounded flex items-center justify-center gap-2 disabled:opacity-50"
+        >
+          {loading ? (
+            <>
+              <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              Uploading...
+            </>
+          ) : (
+            "Add Destination"
+          )}
         </button>
       </form>
     </div>
