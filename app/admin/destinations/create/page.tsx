@@ -37,33 +37,27 @@ export default function CreateDestination() {
       data.append("destination_video", file);
     });
   }
+  
 
-  try{
-    setLoading(true); // ✅ START LOADING
+  const res = await fetch("https://abok-adventures-backend.onrender.com/api/destinations/", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: data,
+  });
 
-    const res = await fetch("https://abok-adventures-backend.onrender.com/api/destinations/", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: data,
-    });
-
+//   const result = await res.json();
+//   alert(result.message);
+// };
     const text = await res.text();
 
-      try {
-        const result = JSON.parse(text);
-        alert(result.message || "Success");
-      } catch (error) {
-        console.error("Server returned non-JSON:", text);
-      }
-   } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
-    } finally {
-      setLoading(false); // ✅ STOP LOADING
+    try {
+      const result = JSON.parse(text);
+      alert(result.message || "Success");
+    } catch (error) {
+      console.error("Server returned non-JSON:", text);
     }
-
   };
 
 
@@ -115,23 +109,10 @@ export default function CreateDestination() {
             onChange={(e) => setVideos(e.target.files)} />
         </div>
 
-        {/* BUTTON WITH LOADER */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-green-600 text-white px-6 py-2 rounded flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
-          >
-
-            {loading ? (
-              <>
-                <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                Uploading...
-              </>
-            ) : (
-              "Create Destination"
-            )}
-
-          </button>
+        <button type="submit"
+          className="bg-green-600 text-white px-6 py-2 rounded">
+          Add Destination
+        </button>
       </form>
     </div>
     </main>
