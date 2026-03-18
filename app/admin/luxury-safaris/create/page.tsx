@@ -6,6 +6,7 @@ export default function CreateSafari() {
   const [formData, setFormData] = useState<any>({});
   const [images, setImages] = useState<FileList | null>(null);
   const [videos, setVideos] = useState<FileList | null>(null);
+  const [loading, setLoading] = useState(false); 
 
   const handleChange = (e: any) => {
     setFormData({
@@ -37,25 +38,32 @@ export default function CreateSafari() {
     });
   }
 
-  const res = await fetch("https://abok-adventures-backend.onrender.com/api/luxury-safaris/create", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: data,
-  });
+  try{
+    setLoading(true); // ✅ START LOADING
 
-//   const result = await res.json();
-//   alert(result.message);
-// };
+    const res = await fetch("https://abok-adventures-backend.onrender.com/api/luxury-safaris/create", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: data,
+    });
+
     const text = await res.text();
 
-    try {
-      const result = JSON.parse(text);
-      alert(result.message || "Success");
-    } catch (error) {
-      console.error("Server returned non-JSON:", text);
+      try {
+        const result = JSON.parse(text);
+        alert(result.message || "Success");
+      } catch (error) {
+        console.error("Server returned non-JSON:", text);
+      }
+   } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false); // ✅ STOP LOADING
     }
+
   };
 
 
@@ -128,7 +136,7 @@ export default function CreateSafari() {
         </div>
 
         <button type="submit"
-          className="bg-green-600 text-white px-6 py-2 rounded">
+          className="bg-green-600 text-white px-6 py-2 rounded cursor-pointer">
           Create Safari
         </button>
       </form>

@@ -141,7 +141,7 @@ export default function UploadGallery() {
     <button
     type="button"
     onClick={()=>removeFile(index)}
-    className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition"
+    className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition cursor-pointer"
     >
 
     Remove
