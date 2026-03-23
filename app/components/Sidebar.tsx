@@ -14,18 +14,30 @@ export default function Sidebar({closeSidebar}: any) {
     return (
         <main>
         {/* SIDEBAR */}
-        <aside className="w-64 bg-[#2a261f] border-r border-[#3a342b] hidden md:flex flex-col p-6 h-[100dvh] fixed">
+        <aside className="w-64 bg-[#2a261f] border-r border-[#3a342b] flex flex-col p-6 h-full">
 
-          <h2 className="text-2xl font-serif mb-8 text-amber-500">
+        {/* HEADER */}
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-serif text-amber-500">
             Abok Admin
           </h2>
 
-          <nav className="space-y-3">
+          {/* CLOSE BUTTON (mobile only) */}
+          <button
+            onClick={closeSidebar}
+            className="md:hidden text-gray-400 hover:text-gray-200"
+          >
+            ✕
+          </button>
+        </div>
+
+        <nav className="space-y-3 overflow-y-auto">
 
             <Link href="/admin" className="block px-4 py-2 rounded-lg hover:bg-amber-700/20 transition">
               Dashboard
             </Link>
 
+            
             {/* SAFARIS DROPDOWN */}
             <div>
               <button
@@ -155,6 +167,15 @@ export default function Sidebar({closeSidebar}: any) {
                 </div>
               )}
             </div>
+
+            {/* CLOSE BUTTON (mobile only) */}
+            <button
+              onClick={closeSidebar}
+              className="mb-6 md:hidden text-gray-400 hover:text-gray-200 transition self-start"
+            >
+              ✕
+            </button>
+
 
           </nav>
         </aside>
