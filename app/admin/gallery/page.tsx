@@ -13,6 +13,11 @@ export default function SafarisPage() {
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([])
   const [loading, setLoading] = useState(true)
 
+  const [preview, setPreview] = useState<{
+  type: "image" | "video";
+  url: string;
+} | null>(null);
+
   // Fetch gallery items
   useEffect(() => {
     const fetchSafaris = async () => {
@@ -90,38 +95,32 @@ export default function SafarisPage() {
                   className="border-t border-[#3a342b] hover:bg-[#332e26] transition"
                 >
                   <td className="p-4">
-                    <Link
-                      key={item._id}
-                      href={`gallery/view/${item._id}`}
-                    >
+                   
+                    
+                   
                     {item.media_type}
-                    </Link>
+                    
                   </td>
                   <td className="p-4 h-40 w-40">
-                    {item.media_type === "video" ?  
-
-
-                        <video
+                    {item.media_type === "video" ? (
+                      <video
                         key={item._id}
-                        controls
-                        className="rounded-lg w-full"
-                        
-
+                        className="rounded-lg w-full cursor-pointer"
                         src={item.media_url}
-
-                        /> : 
-                        <img
-                        key={item._id}
-                        src={item.media_url}
-                        className="rounded-lg w-full"
-                        />
-
+                        onClick={() =>
+                          setPreview({ type: "video", url: item.media_url })
                         }
-
-                        
-
-                        
-
+                      />
+                    ) : (
+                      <img
+                        key={item._id}
+                        src={item.media_url}
+                        className="rounded-lg w-full cursor-pointer"
+                        onClick={() =>
+                          setPreview({ type: "image", url: item.media_url })
+                        }
+                      />
+                    )}
                   </td>
 
                   <td className="p-4 text-right">
@@ -137,6 +136,43 @@ export default function SafarisPage() {
             </tbody>
 
           </table>
+        </div>
+      )}
+
+      {preview && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+
+          {/* Close on background click */}
+          <div
+            className="absolute inset-0"
+            onClick={() => setPreview(null)}
+          />
+
+          {/* Content */}
+          <div className="relative z-10 max-w-4xl w-full p-4">
+            
+            {/* Close Button */}
+            <button
+              onClick={() => setPreview(null)}
+              className="absolute top-4 right-4 text-white text-2xl"
+            >
+              ✕
+            </button>
+
+            {preview.type === "image" ? (
+              <img
+                src={preview.url}
+                className="w-full max-h-[80vh] object-contain rounded-lg"
+              />
+            ) : (
+              <video
+                src={preview.url}
+                controls
+                autoPlay
+                className="w-full max-h-[80vh] rounded-lg"
+              />
+            )}
+          </div>
         </div>
       )}
     </div>

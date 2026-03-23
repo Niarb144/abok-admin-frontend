@@ -9,6 +9,7 @@ export default function DashboardHome() {
   const [galleryCount, setGalleryCount] = useState(0)
   const [hotelCount, setHotelCount] = useState(0)
   const router = useRouter()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     const fetchSafaris = async () => {
@@ -61,20 +62,61 @@ export default function DashboardHome() {
   }, [])
 
   return (
-    <div className="pl-14">
+    <>
+    {sidebarOpen && (
+  <div className="fixed inset-0 z-50 flex">
+    
+    {/* Overlay */}
+    <div
+      className="absolute inset-0 bg-black/50"
+      onClick={() => setSidebarOpen(false)}
+    />
+
+    {/* Sidebar */}
+    <div className="relative w-64 bg-[#1f1b16] p-6 text-white">
+      <button
+        onClick={() => setSidebarOpen(false)}
+        className="mb-6 text-right w-full"
+      >
+        ✕
+      </button>
+
+      <nav className="space-y-4">
+        <p onClick={() => router.push("/admin/safaris")} className="cursor-pointer">Safaris</p>
+        <p onClick={() => router.push("/admin/destinations")} className="cursor-pointer">Destinations</p>
+        <p onClick={() => router.push("/admin/hotels")} className="cursor-pointer">Hotels</p>
+        <p onClick={() => router.push("/admin/luxury-safaris")} className="cursor-pointer">Luxury Safaris</p>
+        <p onClick={() => router.push("/admin/gallery")} className="cursor-pointer">Gallery</p>
+      </nav>
+    </div>
+  </div>
+)}
+    <div className="p-4 md:pl-64 md:pr-6">
+      <div className="flex items-center justify-between mb-6 md:hidden">
+        <h1 className="text-xl font-semibold text-amber-500">
+          Dashboard
+        </h1>
+
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="bg-[#2a261f] p-2 rounded-md border border-[#3a342b]"
+        >
+          ☰
+        </button>
+      </div>
       <h1 className="text-3xl font-serif text-amber-500 mb-8">
         Dashboard Overview
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
 
         {/* SAFARIS CARD */}
         <div
           onClick={() => router.push("/admin/safaris")}
-          className="cursor-pointer bg-[#2a261f] border border-[#3a342b] p-6 rounded-2xl hover:border-amber-600 transition shadow-lg"
+          className="cursor-pointer bg-[#2a261f] border border-[#3a342b] p-4 sm:p-6 rounded-2xl hover:border-amber-600 transition shadow-lg"
         >
-          <h2 className="text-lg text-gray-300">Total Safaris</h2>
-          <p className="text-4xl font-bold text-amber-500 mt-4">
+          <h2 className="text-sm sm:text-lg text-gray-300">...</h2>
+          <p className="text-2xl sm:text-4xl font-bold text-amber-500 mt-2 sm:mt-4">
             {safariCount}
           </p>
         </div>
@@ -123,5 +165,6 @@ export default function DashboardHome() {
 
       </div>
     </div>
+    </>
   )
 }
