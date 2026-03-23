@@ -63,47 +63,8 @@ export default function DashboardHome() {
 
   return (
     <>
-    {sidebarOpen && (
-  <div className="fixed inset-0 z-50 flex">
-    
-    {/* Overlay */}
-    <div
-      className="absolute inset-0 bg-black/50"
-      onClick={() => setSidebarOpen(false)}
-    />
-
-    {/* Sidebar */}
-    <div className="relative w-64 bg-[#1f1b16] p-6 text-white">
-      <button
-        onClick={() => setSidebarOpen(false)}
-        className="mb-6 text-right w-full"
-      >
-        ✕
-      </button>
-
-      <nav className="space-y-4">
-        <p onClick={() => router.push("/admin/safaris")} className="cursor-pointer">Safaris</p>
-        <p onClick={() => router.push("/admin/destinations")} className="cursor-pointer">Destinations</p>
-        <p onClick={() => router.push("/admin/hotels")} className="cursor-pointer">Hotels</p>
-        <p onClick={() => router.push("/admin/luxury-safaris")} className="cursor-pointer">Luxury Safaris</p>
-        <p onClick={() => router.push("/admin/gallery")} className="cursor-pointer">Gallery</p>
-      </nav>
-    </div>
-  </div>
-)}
-    <div className="p-4 md:pl-16 md:pr-6">
-      <div className="flex items-center justify-between mb-6 md:hidden">
-        <h1 className="text-xl font-semibold text-amber-500">
-          Dashboard
-        </h1>
-
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="bg-[#2a261f] p-2 rounded-md border border-[#3a342b]"
-        >
-          ☰
-        </button>
-      </div>
+    <div className="p-4 md:pr-6">
+      
       <h1 className="text-3xl font-serif text-amber-500 mb-8">
         Dashboard Overview
       </h1>

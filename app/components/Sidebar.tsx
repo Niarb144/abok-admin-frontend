@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-export default function Sidebar() {
+export default function Sidebar({closeSidebar}: any) {
   const [openSafaris, setOpenSafaris] = useState(false)
   const [openLuxurySafaris, setOpenLuxurySafaris] = useState(false)
   const [openDestinations, setOpenDestinations] = useState(false)

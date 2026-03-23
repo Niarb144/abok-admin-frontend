@@ -12,27 +12,50 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [openSafaris, setOpenSafaris] = useState(false)
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
+    
     <AdminGuard>
-      <div className="min-h-screen flex bg-[#1c1a16] text-white">
+      <div className="min-h-screen flex bg-[#1c1a16] text-white relative">
+
+        {/* MOBILE OVERLAY */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
 
         {/* SIDEBAR */}
-        <Sidebar />
+        <div
+          className={`
+            fixed md:static z-50 top-0 left-0 h-full w-64 bg-[#1c1a16]
+            transform transition-transform duration-300
+            ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+            md:translate-x-0
+          `}
+        >
+          <Sidebar closeSidebar={() => setSidebarOpen(false)} />
+        </div>
 
         {/* CONTENT AREA */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col w-full">
 
-          <AdminHeader />
+          {/* HEADER */}
+          <AdminHeader openSidebar={() => setSidebarOpen(true)} />
 
-          <main className="p-8 flex-1 bg-[#1c1a16] pl-64">
+          {/* MAIN */}
+          <main className="flex-1 bg-[#1c1a16] p-4 sm:p-6 md:p-8 md:ml-16">
             {children}
           </main>
 
         </div>
       </div>
+
       <Footer />
     </AdminGuard>
+ 
   )
 }

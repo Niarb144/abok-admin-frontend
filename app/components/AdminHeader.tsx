@@ -5,11 +5,13 @@ import { Menu, X } from "lucide-react";
 import { CiPower } from "react-icons/ci";
 import { logout } from '@/app/lib/auth'
 
-export default function AdminNavbar() {
+export default function AdminNavbar({ openSidebar }: any) {
   const [isOpen, setIsOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
     <header className="bg-white border-b shadow-sm sticky top-0 z-50">
+      
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
 
@@ -42,27 +44,13 @@ export default function AdminNavbar() {
           {/* Mobile Button */}
           <button
             className="md:hidden text-gray-700"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={openSidebar}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <Menu size={24} />
           </button>
         </div>
       </div>
 
-      {/* Mobile Dropdown */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t shadow-md">
-          <nav className="flex flex-col px-6 py-4 gap-4 text-gray-700 font-medium">
-            <a href="/admin/dashboard" className="hover:text-[#8B4513] transition">
-              Dashboard
-            </a>
-            <a href="/admin/users" className="hover:text-[#8B4513] transition">
-              Users
-            </a>
-            <button onClick={logout} className="btn cursor-pointer">Logout</button>
-          </nav>
-        </div>
-      )}
     </header>
   );
 }
