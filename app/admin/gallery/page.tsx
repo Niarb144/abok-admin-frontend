@@ -65,7 +65,7 @@ export default function SafarisPage() {
         All Gallery Items
       </h1>
 
-      <Link href="/create" className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition">
+      <Link href="/admin/gallery/create" className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition">
         Add Gallery Item
       </Link>
 
