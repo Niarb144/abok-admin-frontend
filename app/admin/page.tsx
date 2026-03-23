@@ -91,7 +91,7 @@ export default function DashboardHome() {
     </div>
   </div>
 )}
-    <div className="p-4 md:pl-64 md:pr-6">
+    <div className="p-4 md:pl-16 md:pr-6">
       <div className="flex items-center justify-between mb-6 md:hidden">
         <h1 className="text-xl font-semibold text-amber-500">
           Dashboard
