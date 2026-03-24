@@ -65,14 +65,14 @@ export default function SafarisPage() {
   }
 
   return (
-    <div className="pl-16 mb-10">
+    <div className=" mb-10">
       <h1 className="text-2xl font-serif text-amber-500 mb-6">
         All Gallery Items
       </h1>
 
-      <Link href="/admin/gallery/create" className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition">
+      {/* <Link href="/admin/gallery/create" className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition">
         Add Gallery Item
-      </Link>
+      </Link> */}
 
       {loading ? (
         <p className="text-gray-400">Loading gallery items...</p>

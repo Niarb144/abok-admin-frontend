@@ -14,7 +14,7 @@ export default function Sidebar({closeSidebar}: any) {
     return (
         <main>
         {/* SIDEBAR */}
-        <aside className="w-64 bg-[#2a261f] border-r border-[#3a342b] flex flex-col p-6 h-full">
+        <aside className="w-64 bg-[#2a261f] border-r border-[#3a342b] flex flex-col p-6 h-[100dvh]">
 
         {/* HEADER */}
         <div className="flex items-center justify-between mb-8">
