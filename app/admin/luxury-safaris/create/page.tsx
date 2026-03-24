@@ -137,8 +137,10 @@ export default function CreateSafari() {
 
         <button type="submit"
           className="bg-green-600 text-white px-6 py-2 rounded cursor-pointer">
-          Create Safari
+          
+          {loading ? "Uploading..." : "Upload Safari"}
         </button>
+        
       </form>
     </div>
     </main>
