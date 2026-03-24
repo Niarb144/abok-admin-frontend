@@ -147,7 +147,7 @@ export default function Sidebar({closeSidebar}: any) {
             <div>
               <button
                 onClick={() => setOpenAccommodations(!openAccommodations)}
-                className="flex items-center justify-between w-full px-4 py-2 rounded-lg hover:bg-amber-700/20 transition"
+                className="flex items-center justify-between w-full px-0 py-2 rounded-lg hover:bg-amber-700/20 transition"
               >
                 Manage Accommodations
                 <ChevronDown

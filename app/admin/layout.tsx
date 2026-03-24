@@ -31,7 +31,7 @@ export default function AdminLayout({
         {/* SIDEBAR */}
         <div
           className={`
-            fixed md:static z-50 top-0 left-0 h-full w-64 bg-[#1c1a16]
+            fixed z-50 top-0 left-0 h-full w-64 bg-[#1c1a16]
             transform transition-transform duration-300
             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
             md:translate-x-0
@@ -41,7 +41,7 @@ export default function AdminLayout({
         </div>
 
         {/* CONTENT AREA */}
-        <div className="flex-1 flex flex-col w-full">
+        <div className="flex-1 md:ml-64 flex flex-col w-full">
 
           {/* HEADER */}
           <AdminHeader openSidebar={() => setSidebarOpen(true)} />
