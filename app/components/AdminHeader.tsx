@@ -29,12 +29,12 @@ export default function AdminNavbar({ openSidebar }: any) {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center gap-8 text-gray-600 font-medium">
-            <a href="/admin/dashboard" className="hover:text-[#8B4513] transition">
+            <a href="/admin/" className="hover:text-[#8B4513] transition">
               Dashboard
             </a>
-            <a href="/admin/users" className="hover:text-[#8B4513] transition">
+            {/* <a href="/admin/users" className="hover:text-[#8B4513] transition">
               Users
-            </a>
+            </a> */}
             <button onClick={logout} className="btn cursor-pointer flex items-center gap-2">
               <CiPower className="text-white-900" />
               Logout
