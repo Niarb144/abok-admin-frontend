@@ -83,6 +83,8 @@ export default function SafarisPage() {
               <tr>
                 <th className="p-4">Item</th>
 
+                <th className="p-4">Media</th>
+
                 <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
