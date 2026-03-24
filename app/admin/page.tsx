@@ -76,7 +76,7 @@ export default function DashboardHome() {
           onClick={() => router.push("/admin/safaris")}
           className="cursor-pointer bg-[#2a261f] border border-[#3a342b] p-4 sm:p-6 rounded-2xl hover:border-amber-600 transition shadow-lg"
         >
-          <h2 className="text-sm sm:text-lg text-gray-300">...</h2>
+          <h2 className="text-sm sm:text-lg text-gray-300">Safaris</h2>
           <p className="text-2xl sm:text-4xl font-bold text-amber-500 mt-2 sm:mt-4">
             {safariCount}
           </p>
