@@ -10,6 +10,7 @@ export default function Sidebar({closeSidebar}: any) {
   const [openDestinations, setOpenDestinations] = useState(false)
   const [openGallery, setOpenGallery] = useState(false)
   const [openAccommodations, setOpenAccommodations] = useState(false)
+  const [openBlogs, setOpenBlogs] = useState(false)
 
     return (
         <main>
@@ -167,6 +168,31 @@ export default function Sidebar({closeSidebar}: any) {
                 </div>
               )}
             </div>
+
+            {/* BLOGS DROPDOWN */}
+            <div>
+              <button
+                onClick={() => setOpenBlogs(!openBlogs)}
+                className="flex items-center justify-between w-full px-0 py-2 rounded-lg hover:bg-amber-700/20 transition"
+              >
+                Manage Blogs
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${openBlogs ? "rotate-180" : ""}`}
+                />
+              </button>
+              {openBlogs && (
+                <div className="ml-4 mt-2 space-y-2 text-sm text-gray-300">
+                  <Link href="/admin/blogs" className="block hover:text-amber-400">
+                    View Blogs
+                  </Link>
+                  <Link href="/admin/blogs/create" className="block hover:text-amber-400">
+                    Create Blog
+                  </Link>
+                </div>
+              )}
+            </div>
+
 
             {/* CLOSE BUTTON (mobile only) */}
             <button

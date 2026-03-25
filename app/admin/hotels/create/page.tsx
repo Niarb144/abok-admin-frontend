@@ -21,21 +21,19 @@ export default function CreateHotel() {
     const token = localStorage.getItem("admin_token");
     const data = new FormData();
 
-    Object.keys(formData).forEach(key => {
-      if (formData[key]) {
-        data.append(key, formData[key]);
-      }
+    Object.keys(formData).forEach((key) => {
+      data.append(key, formData[key]);
     });
 
     if (images) {
-      Array.from(images).forEach(file => {
+      Array.from(images).forEach((file) => {
         data.append("hotel_images", file);
       });
     }
 
     if (videos) {
-      Array.from(videos).forEach(file => {
-        data.append("hotel_videos", file);
+      Array.from(videos).forEach((file) => {
+        data.append("hotel_video", file);
       });
     }
 
@@ -43,7 +41,7 @@ export default function CreateHotel() {
       setLoading(true); // ✅ START LOADING
 
       const res = await fetch(
-        "http://localhost:5000/api/hotels",
+        "https://abok-adventures-backend.onrender.com/api/hotels",
         {
           method: "POST",
           headers: {

@@ -19,7 +19,6 @@ export default function CreateSafari() {
     e.preventDefault();
 
     const token = localStorage.getItem("admin_token");
-
     const data = new FormData();
 
     Object.keys(formData).forEach((key) => {
