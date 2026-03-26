@@ -10,21 +10,14 @@ export default function AdminNavbar({ openSidebar }: any) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <header className="bg-white border-b shadow-sm sticky top-0 z-50">
+    <header className="bg-white md:w-[80vw] md:ml-28 border-b sm:w-full shadow-sm sticky top-0 z-50">
       
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
 
           {/* Left Side */}
           <div className="flex items-center gap-3">
-            <img
-              src="/Logo.png"
-              className="w-10 h-auto"
-              alt="Abok Logo"
-            />
-            <h1 className="text-lg md:text-xl font-semibold text-gray-800">
-              Abok Admin
-            </h1>
+            
           </div>
 
           {/* Desktop Menu */}

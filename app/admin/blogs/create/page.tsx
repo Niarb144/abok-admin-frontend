@@ -7,7 +7,7 @@ export default function CreateBlogPage() {
   const router = useRouter();
 
   const handleSubmit = async (data: any) => {
-    await fetch("http://localhost:5000/api/blogs/create", {
+    await fetch("https://abok-adventures-backend.onrender.com/api/blogs/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

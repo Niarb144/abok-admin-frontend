@@ -19,9 +19,16 @@ export default function Sidebar({closeSidebar}: any) {
 
         {/* HEADER */}
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-serif text-amber-500">
-            Abok Admin
-          </h2>
+           <div className="flex items-center gap-3">
+            <img
+              src="/Logo.png"
+              className="w-10 h-auto"
+              alt="Abok Logo"
+            />
+            <h1 className="text-lg md:text-xl font-semibold text-[#8f7a5e]">
+              Abok Admin
+            </h1>
+          </div>
 
           {/* CLOSE BUTTON (mobile only) */}
           <button
