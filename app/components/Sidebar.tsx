@@ -67,9 +67,9 @@ export default function Sidebar({closeSidebar}: any) {
                   <Link href="/admin/safaris/create" className="block hover:text-amber-400">
                     Create Safari
                   </Link>
-                  <Link href="/admin/safaris/update" className="block hover:text-amber-400">
+                  {/* <Link href="/admin/safaris/update" className="block hover:text-amber-400">
                     Update Safari
-                  </Link>
+                  </Link> */}
                 </div>
               )}
             </div>
@@ -95,9 +95,9 @@ export default function Sidebar({closeSidebar}: any) {
                   <Link href="/admin/luxury-safaris/create" className="block hover:text-amber-400">
                     Create Safari
                   </Link>
-                  <Link href="/admin/luxury-safaris/update" className="block hover:text-amber-400">
+                  {/* <Link href="/admin/luxury-safaris/update" className="block hover:text-amber-400">
                     Update Safari
-                  </Link>
+                  </Link> */}
                 </div>
               )}
             </div>
