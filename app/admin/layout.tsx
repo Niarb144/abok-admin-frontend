@@ -41,7 +41,7 @@ export default function AdminLayout({
         </div>
 
         {/* CONTENT AREA */}
-        <div className="flex-1 md:ml-36 flex flex-col w-full">
+        <div className="flex-1 md:ml-42 flex flex-col w-full">
 
           {/* HEADER */}
           <AdminHeader openSidebar={() => setSidebarOpen(true)} />

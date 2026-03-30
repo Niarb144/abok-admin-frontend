@@ -50,7 +50,7 @@ export default function DashboardHome() {
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/hotels")
+        const res = await fetch("https://abok-adventures-backend.onrender.com/api/hotels")
         const data = await res.json()
         setHotelCount(data.length)
       } catch (error) {

@@ -10,7 +10,7 @@ export default function AdminNavbar({ openSidebar }: any) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <header className="bg-white md:w-[80vw] md:ml-28 border-b sm:w-full shadow-sm sticky top-0 z-50">
+    <header className="bg-white md:w-full md:ml-0 border-b sm:w-full shadow-sm sticky top-0">
       
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
