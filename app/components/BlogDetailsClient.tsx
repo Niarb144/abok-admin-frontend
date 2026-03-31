@@ -20,6 +20,27 @@ export default function BlogDetailsClient({ blogs }: any) {
         </div>
       </div>
 
+      {blogs.content.map((block: any, index: number) => {
+        if (block.type === "text") {
+          return (
+            <p key={index} className="text-white-600 max-w-2xl">
+              {block.value}
+            </p>
+          );
+        }
+
+        if (block.type === "image") {
+          return (
+            <img
+              key={index}
+              src={block.value}
+              alt=""
+              className="w-full rounded"
+            />
+          );
+        }
+      })}
+
       {/* VIDEO (Optional – Clean Display) */}
       {blogs.blogs_video && (
         <div className="bg-white p-6 rounded-xl shadow-sm border">
