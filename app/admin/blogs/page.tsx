@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function AdminBlogsPage() {
   const [blogs, setBlogs] = useState([]);
@@ -16,7 +17,7 @@ export default function AdminBlogsPage() {
   }, []);
 
   const deleteBlog = async (id: string) => {
-    await fetch(`http://localhost:5000/api/blogs/${id}`, {
+    await fetch(`https://abok-adventures-backend.onrender.com/api/blogs/${id}`, {
       method: "DELETE",
     });
 
@@ -45,7 +46,8 @@ export default function AdminBlogsPage() {
               </td>
               <td className="p-2 flex gap-2">
                 <a
-                  href={`/blogs/${blog._id}`}
+                  key={blog._id}
+                  href={`blogs/view/${blog._id}`}
                   className="text-blue-500"
                   target="_blank"
                 >
