@@ -49,13 +49,20 @@ export default function UploadGallery() {
 
     try{
 
-        await fetch(
+        const res = await fetch(
         "https://abok-adventures-backend.onrender.com/api/gallery/upload",
         {
         method:"POST",
         body:formData
         }
         );
+        if (!res.ok) {
+            const text = await res.text();
+            console.error(text);
+            alert("Upload failed: " + text);
+            return;
+            }
+
         alert("Media uploaded successfully");
 
         setFiles([]);
@@ -95,6 +102,7 @@ export default function UploadGallery() {
     <input
     type="file"
     multiple
+    capture="environment" // 👈 helps mobile camera
     accept="image/*,video/*"
     onChange={handleFiles}
     className="hidden"
