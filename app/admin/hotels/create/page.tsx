@@ -56,7 +56,7 @@ export default function CreateHotel() {
 
       if (!res.ok) {
         console.error("Server error:", text);
-        alert("Upload failed");
+        alert(text);
         return;
       }
 

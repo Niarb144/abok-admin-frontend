@@ -95,7 +95,7 @@ export default function UploadGallery() {
     <input
     type="file"
     multiple
-    accept="image/*,video/mp4"
+    accept="image/*,video/*"
     onChange={handleFiles}
     className="hidden"
     />
