@@ -6,7 +6,7 @@ interface Hotel {
   _id: string   
   title: string
   price: number
-  duration: string
+  country: string
 }
 
 export default function HotelsPage() {
@@ -17,7 +17,7 @@ export default function HotelsPage() {
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/hotels")
+        const res = await fetch("https://abok-adventures-backend.onrender.com/api/hotels")
         const data = await res.json()
         setHotels(data)
       } catch (error) {
@@ -38,7 +38,7 @@ export default function HotelsPage() {
     try {
       const token = localStorage.getItem("admin_token")
 
-      const res = await fetch(`http://localhost:5000/api/hotels/${id}`, {
+      const res = await fetch(`https://abok-adventures-backend.onrender.com/api/hotels/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
