@@ -10,6 +10,7 @@ export default function Sidebar({closeSidebar}: any) {
   const [openDestinations, setOpenDestinations] = useState(false)
   const [openGallery, setOpenGallery] = useState(false)
   const [openAccommodations, setOpenAccommodations] = useState(false)
+  const [openBookings, setOpenBookings] = useState(false)
   const [openBlogs, setOpenBlogs] = useState(false)
 
     return (
@@ -172,6 +173,31 @@ export default function Sidebar({closeSidebar}: any) {
                   <Link href="/admin/hotels/create" className="block hover:text-amber-400">
                     Add Accommodation
                   </Link>
+                </div>
+              )}
+            </div>
+
+            {/* BOOKING DROPDOWN */}
+            <div>
+              <button
+                onClick={() => setOpenBookings(!openBookings)}
+                className="flex items-center justify-between w-full px-0 py-2 rounded-lg hover:bg-amber-700/20 transition"
+              >
+                Manage Bookings
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${openBookings ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {openBookings && (
+                <div className="ml-4 mt-2 space-y-2 text-sm text-gray-300">
+                  <Link href="/admin/booking" className="block hover:text-amber-400">
+                    View Bookings
+                  </Link>
+                  {/* <Link href="/admin/booking/calendar" className="block hover:text-amber-400">
+                    Booking Calendar
+                  </Link> */}
                 </div>
               )}
             </div>
