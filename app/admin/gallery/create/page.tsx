@@ -20,17 +20,17 @@ export default function UploadGallery() {
 
     };
 
-    const removeFile = (index:number) => {
+    const removeFile = (index: number) => {
+        URL.revokeObjectURL(preview[index]);
 
-    const newFiles = [...files];
-    const newPreview = [...preview];
+        const newFiles = [...files];
+        const newPreview = [...preview];
 
-    newFiles.splice(index,1);
-    newPreview.splice(index,1);
+        newFiles.splice(index, 1);
+        newPreview.splice(index, 1);
 
-    setFiles(newFiles);
-    setPreview(newPreview);
-
+        setFiles(newFiles);
+        setPreview(newPreview);
     };
 
     const handleUpload = async (e:any) => {
@@ -102,7 +102,6 @@ export default function UploadGallery() {
     <input
     type="file"
     multiple
-    capture="environment" // 👈 helps mobile camera
     accept="image/*,video/*"
     onChange={handleFiles}
     className="hidden"
