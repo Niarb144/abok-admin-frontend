@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import BookingCalendar from "../../components/BookingCalendar";
+import { AnimatePresence, motion } from "framer-motion";
+import { IoCheckmarkCircle, IoClose } from "react-icons/io5";
 
 export default function AdminBookings() {
   const [bookings, setBookings] = useState([]);
@@ -81,6 +83,16 @@ const deleteBooking = async (id: string) => {
   setLoadingId(null);
 };
 
+useEffect(() => {
+  if (message) {
+    const timer = setTimeout(() => {
+      setMessage("");
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }
+}, [message]);
+
 return (
   <div className="p-6">
     <h1 className="text-2xl font-bold mb-6">Bookings</h1>
@@ -136,6 +148,51 @@ return (
         </div>
       </div>
     ))}
+
+    <AnimatePresence>
+      {message && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setMessage("")}
+        >
+          {/* Modal */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0, y: 40 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.8, opacity: 0, y: 40 }}
+            transition={{ duration: 0.3 }}
+            className="relative bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setMessage("")}
+              className="absolute top-3 right-3 text-gray-400 hover:text-black"
+            >
+              <IoClose size={20} />
+            </button>
+
+            {/* Icon */}
+            <IoCheckmarkCircle className="text-green-500 text-5xl mx-auto mb-3" />
+
+            {/* Message */}
+            <p className="text-gray-700 font-medium">{message}</p>
+
+            {/* Action */}
+            <button
+              onClick={() => setMessage("")}
+              className="mt-5 bg-[#8B4513] text-white px-5 py-2 rounded-lg hover:bg-[#6f3710] transition"
+            >
+              OK
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   </div>
+  
 );
 }
