@@ -5,6 +5,9 @@ import BookingCalendar from "../../components/BookingCalendar";
 
 export default function AdminBookings() {
   const [bookings, setBookings] = useState([]);
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("https://abok-adventures-backend.onrender.com/api/bookings")
@@ -13,21 +16,69 @@ export default function AdminBookings() {
   }, []);
 
   const updateStatus = async (id: string, status: string) => {
-  await fetch(`https://abok-adventures-backend.onrender.com/api/bookings/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ status }),
-  });
+  setLoadingId(id);
+  setMessage("");
+  setError("");
 
-  location.reload();
+  try {
+    const res = await fetch(
+      `https://abok-adventures-backend.onrender.com/api/bookings/${id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error || "Failed to update");
+
+    // ✅ Update UI without reload
+    setBookings((prev: any) =>
+      prev.map((b: any) =>
+        b._id === id ? { ...b, status } : b
+      )
+    );
+
+    setMessage(`Booking ${status === "confirmed" ? "approved" : "updated"} successfully`);
+
+  } catch (err: any) {
+    console.error(err);
+    setError(err.message);
+  }
+
+  setLoadingId(null);
 };
 
 const deleteBooking = async (id: string) => {
-  await fetch(`https://abok-adventures-backend.onrender.com/api/bookings/${id}`, {
-    method: "DELETE",
-  });
+  if (!confirm("Are you sure you want to delete this booking?")) return;
 
-  location.reload();
+  setLoadingId(id);
+  setMessage("");
+  setError("");
+
+  try {
+    const res = await fetch(
+      `https://abok-adventures-backend.onrender.com/api/bookings/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!res.ok) throw new Error("Delete failed");
+
+    // ✅ Remove from UI
+    setBookings((prev: any) => prev.filter((b: any) => b._id !== id));
+
+    setMessage("Booking deleted successfully");
+
+  } catch (err: any) {
+    console.error(err);
+    setError(err.message);
+  }
+
+  setLoadingId(null);
 };
 
 return (
@@ -36,33 +87,51 @@ return (
 
     <BookingCalendar className="mb-6" bookings={bookings} />
 
+    {message && (
+      <div className="bg-green-100 text-green-700 p-3 mb-4 rounded">
+        {message}
+      </div>
+    )}
+
+    {error && (
+      <div className="bg-red-100 text-red-700 p-3 mb-4 rounded">
+        {error}
+      </div>
+    )}
+
     {bookings.map((b: any) => (
       <div key={b._id} className="border p-4 mb-4 rounded">
-        <h2 className="font-semibold">{b.safari?.safari_title}</h2>
+        <h2 className="font-semibold">
+          {b.safari?.safari_title || "Safari Name Not Found"}
+        </h2>
         <p>{b.name} | {b.email}</p>
+        <p>{b.phone}</p>
         <p>Date: {new Date(b.travelDate).toDateString()}</p>
         <p>Status: {b.status}</p>
 
         <div className="flex gap-2 mt-3">
           <button
             onClick={() => updateStatus(b._id, "confirmed")}
-            className="bg-green-600 text-white px-3 py-1"
+            disabled={loadingId === b._id}
+            className="bg-green-600 text-white px-3 py-1 disabled:bg-gray-400 cursor-pointer"
           >
-            Approve
+            {loadingId === b._id ? "Processing..." : "Approve"}
           </button>
 
           <button
             onClick={() => updateStatus(b._id, "cancelled")}
-            className="bg-yellow-600 text-white px-3 py-1"
+            disabled={loadingId === b._id}
+            className="bg-yellow-600 text-white px-3 py-1 disabled:bg-gray-400 cursor-pointer"
           >
             Cancel
           </button>
 
           <button
             onClick={() => deleteBooking(b._id)}
-            className="bg-red-600 text-white px-3 py-1"
+            disabled={loadingId === b._id}
+            className="bg-red-600 text-white px-3 py-1 disabled:bg-gray-400 cursor-pointer"
           >
-            Delete
+            {loadingId === b._id ? "Deleting..." : "Delete"}
           </button>
         </div>
       </div>
